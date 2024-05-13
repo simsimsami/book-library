@@ -1,0 +1,23 @@
+{
+  "name": "kiss-library",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db_setup": "nodemon ./db/db_setup.js",
+    "start": "nodemon ./route/index.js -L",
+    "db_check": "sudo service postgresql status",
+    "db_start": "sudo service postgresql start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
+    "pg": "^8.11.5"
+  }
+}

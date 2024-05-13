@@ -1,0 +1,6 @@
+scrap
+node_modules
+notes
+db/sql_commands.sql
+db/db_setup.js
+.env
