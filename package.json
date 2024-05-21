@@ -5,10 +5,10 @@
   "type": "module",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "db_setup": "nodemon ./db/db_setup.js",
-    "start": "nodemon ./route/index.js -L",
-    "db_check": "sudo service postgresql status",
+    "test": "nodemon backend/test.js -L",
+    "start": "nodemon backend/index.js -L",
+    "db_status": "sudo service postgresql status",
     "db_start": "sudo service postgresql start"
   },
   "keywords": [],

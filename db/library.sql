@@ -57,5 +57,4 @@ join author on author.author_id = book_author.author_id
 join publisher on publisher.publisher_id = book.publisher_id
 join genre_book on genre_book.book_id = book.book_id
 join genre on genre.genre_id = genre_book.genre_id
-WHERE publisher.publisher_id = 1
 ORDER BY book.book_id ASC;

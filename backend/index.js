@@ -11,9 +11,24 @@ HTTP Method
 - PUT: used to update resources.
 - DELETE: used to delete resources.
 
+
+
+< ----- > < ----- > < ----- > I want to try to improve the query requests < ----- > < ----- > < ----- >
+
+It might be a good idea to have more routes. Example
+
+book/:bookId/author/
+- This gets all of the authors under a specific book
+
+book/:bookId/genre
+- Gets all of the genres under a specific book
+
+author/:authorId/books
+- Gets all books under a specific author
+
 */
 
-import express from 'express';
+import express, { request } from 'express';
 import {
   get_Author,
   get_Authors,
@@ -23,11 +38,18 @@ import {
   get_Publishers,
   get_Genre,
   get_Genres,
-  get_AuthorBooks,
 } from '../db/database.js';
+
+import authorRoute from './route/author.js';
+import bookRoute from './route/book.js';
 
 const app = express();
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
 
 const PORT = process.env.PORT || 3000;
 
@@ -37,35 +59,21 @@ app.listen(PORT, () => {
 
 // Endpoint - defined route
 
-app.get('/status', (request, response) => {
-  const status = {
-    Status: 'Running',
-  };
-  response.send(status);
-});
+app.use('/authors', authorRoute);
+app.use('/books', bookRoute);
 
-// Author Route
-app.get('/authors/:authorId?', async (req, res) => {
+// Get list of books from author
+
+app.get('/authors-books/:authorId?', async (req, res, next) => {
   const authorId = req.params.authorId;
   if (!authorId) {
-    const author = await get_Authors();
-    res.send(author.rows);
+    res.send('Nope');
   } else {
-    const response = await get_Author(authorId);
-    res.send(response.rows);
+    res.send('Theres something inside req.params.authorid');
+    // const response = await get_AuthorBooks(authorId);
+    // res.send(response.rows);
   }
-});
-
-// Book Route
-app.get('/books/:bookId?', async (req, res) => {
-  const bookId = req.params.bookId;
-  if (!bookId) {
-    const books = await get_Books();
-    res.json(books.rows);
-  } else {
-    const response = await get_Book(bookId);
-    res.send(response.rows);
-  }
+  next();
 });
 
 // Publisher route
@@ -94,14 +102,5 @@ app.get('/genre/:genreId?', async (req, res) => {
 });
 
 ///////////////////////////////
-
-// Inner table routes
-
-// Get Authors books
-app.get('/author/books/:authorId', async (req, res) => {
-  const authorId = req.params.authorId;
-  const response = await get_AuthorBooks(authorId);
-  res.send(response.rows);
-});
 
 // Get Publishers books

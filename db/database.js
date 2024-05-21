@@ -58,6 +58,27 @@ export async function get_Author(authorId) {
   }
 }
 
+export async function post_Author(
+  author_first_name,
+  author_last_name,
+  author_title,
+) {
+  const client = await pool.connect();
+  try {
+    const query = await client.query(`
+    Insert INTO author
+    (author_first_name, author_last_name, author_title)
+    VALUES
+    ('${author_first_name}', '${author_last_name}', '${author_title}')`);
+    return 'Author Inserted';
+  } catch (e) {
+  } finally {
+    client.release();
+  }
+}
+
+// Book PostgreSQL commands
+
 export async function get_Books() {
   const client = await pool.connect();
   try {
@@ -72,27 +93,30 @@ export async function get_Books() {
 
 export async function get_Book(bookId) {
   // get information about and around the book
+
   const client = await pool.connect();
   try {
     const query = await client.query(
-      `select
-      book.book_id,
-      book.book_title,
-      genre.genre_title,
-      publisher.publisher_title,
-      book.isbn,
-      book.book_release,
-      author.author_first_name,
-      author.author_last_name
-      from book
-      join genre_book on genre_book.book_id = book.book_id
-      join genre on genre.genre_id = genre_book.genre_id
-      join book_author on book_author.book_id = book.book_id
-      join author on author.author_id = book_author.author_id
-      join publisher on book.publisher_id = publisher.publisher_id
-      WHERE book.book_id = ${bookId};`,
+      `SELECT * from book where book_id = ${bookId}`,
     );
     return query;
+  } catch (e) {
+    console.log(e);
+  } finally {
+    client.release();
+  }
+}
+
+// Create into book897
+export async function post_Book(book_title, book_release, publisher_id, ISBN) {
+  const client = await pool.connect();
+  try {
+    const query = client.query(
+      `INSERT INTO book (book_title, book_release, publisher_id, ISBN)
+      VALUES
+      ('${book_title}', '${book_release}', ${publisher_id}, '${ISBN}')`,
+    );
+    return 'Entry Inserted';
   } catch (e) {
     console.log(e);
   } finally {
@@ -178,7 +202,6 @@ export async function get_AuthorBooks(authorId) {
       book.book_id,
       book.book_title,
       book.book_release,
-      book.publisher_id,
       author.author_first_name,
       author.author_last_name,
       book.isbn
