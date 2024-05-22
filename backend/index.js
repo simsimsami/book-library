@@ -42,6 +42,8 @@ import {
 
 import authorRoute from './route/author.js';
 import bookRoute from './route/book.js';
+import publisherRoute from './route/publisher.js'
+import genreRoute from './route/genre.js'
 
 const app = express();
 app.use(express.json());
@@ -61,6 +63,8 @@ app.listen(PORT, () => {
 
 app.use('/authors', authorRoute);
 app.use('/books', bookRoute);
+app.use('/publisher', publisherRoute);
+app.use('/genre', genreRoute);
 
 // Get list of books from author
 
@@ -77,29 +81,29 @@ app.get('/authors-books/:authorId?', async (req, res, next) => {
 });
 
 // Publisher route
-app.get('/publishers/:pubId?', async (req, res) => {
-  // if there is no pubId, show all publishers
-  const pubId = req.params.pubId;
-  if (!pubId) {
-    const response = await get_Publishers();
-    res.send(response.rows);
-  } else {
-    const response = await get_Publisher(pubId);
-    res.send(response.rows);
-  }
-});
+// app.get('/publishers/:pubId?', async (req, res) => {
+//   // if there is no pubId, show all publishers
+//   const pubId = req.params.pubId;
+//   if (!pubId) {
+//     const response = await get_Publishers();
+//     res.send(response.rows);
+//   } else {
+//     const response = await get_Publisher(pubId);
+//     res.send(response.rows);
+//   }
+// });
 
 // Genre Route
-app.get('/genre/:genreId?', async (req, res) => {
-  const genreId = req.params.genreId;
-  if (!genreId) {
-    const genre = await get_Genres();
-    res.send(genre.rows);
-  } else {
-    const response = await get_Genre(genreId);
-    res.send(response.rows);
-  }
-});
+// app.get('/genre/:genreId?', async (req, res) => {
+//   const genreId = req.params.genreId;
+//   if (!genreId) {
+//     const genre = await get_Genres();
+//     res.send(genre.rows);
+//   } else {
+//     const response = await get_Genre(genreId);
+//     res.send(response.rows);
+//   }
+// });
 
 ///////////////////////////////
 
