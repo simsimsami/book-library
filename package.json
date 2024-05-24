@@ -7,7 +7,7 @@
   "scripts": {
     "db_setup": "nodemon ./db/db_setup.js",
     "test": "nodemon backend/test.js -L",
-    "start": "nodemon backend/index.js -L",
+    "index": "nodemon backend/index.js -L",
     "db_status": "sudo service postgresql status",
     "db_start": "sudo service postgresql start"
   },

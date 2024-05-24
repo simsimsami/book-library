@@ -138,6 +138,9 @@ export async function get_Publishers() {
   }
 }
 
+// I might move the query to a different function
+// Getting a publisher should just get a specific publisher
+
 export async function get_Publisher(pubId) {
   const client = await pool.connect();
   try {
