@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { get_Books, get_Book, post_Book } from '../../db/database.js';
+import { get_Books, get_Book, post_Book } from '../../db/database/database.js';
 
 // Book Route
 router.get('/:bookId?', async (req, res) => {

@@ -30,10 +30,10 @@ author/:authorId/books
 
 import express, { request } from 'express';
 
-import authorRoute from './route/author.js';
-import bookRoute from './route/book.js';
-import publisherRoute from './route/publisher.js';
-import genreRoute from './route/genre.js';
+import authorRoute from './route/authorController.js';
+import bookRoute from './route/bookController.js';
+import publisherRoute from './route/publisherController.js';
+import genreRoute from './route/genreController.js';
 
 const app = express();
 app.use(express.json());

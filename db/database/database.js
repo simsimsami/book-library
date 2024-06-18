@@ -1,22 +1,47 @@
-import pg from 'pg';
+// import pg from 'pg';
 
-const { Client, Pool } = pg;
-import * as dotenv from 'dotenv';
-dotenv.config({});
+// const { Client, Pool } = pg;
+// import * as dotenv from 'dotenv';
+// dotenv.config({});
 
-const DB_USER = String(process.env.DB_USER);
-const DB_PASSWORD = String(process.env.DB_PASSWORD);
-const DB_HOST = String(process.env.DB_HOST);
-const DB_DATABASE = String(process.env.DB_DATABASE);
-const DB_PORT = String(process.env.DB_PORT);
+// const DB_USER = String(process.env.DB_USER);
+// const DB_PASSWORD = String(process.env.DB_PASSWORD);
+// const DB_HOST = String(process.env.DB_HOST);
+// const DB_DATABASE = String(process.env.DB_DATABASE);
+// const DB_PORT = String(process.env.DB_PORT);
 
-const pool = new Pool({
-  user: DB_USER,
-  password: DB_PASSWORD,
-  host: DB_HOST,
-  database: DB_DATABASE,
-  port: DB_PORT,
-});
+// const pool = new Pool({
+//   user: DB_USER,
+//   password: DB_PASSWORD,
+//   host: DB_HOST,
+//   database: DB_DATABASE,
+//   port: DB_PORT,
+// });
+
+// -----> database.config.js: export default pool is comment out
+// import config_pool from '../app/config/database.config.js';
+
+// import pg from 'pg';
+
+// const { Client, Pool } = pg;
+// import * as dotenv from 'dotenv';
+// dotenv.config({});
+
+// const DB_USER = String(process.env.DB_USER);
+// const DB_PASSWORD = String(process.env.DB_PASSWORD);
+// const DB_HOST = String(process.env.DB_HOST);
+// const DB_DATABASE = String(process.env.DB_DATABASE);
+// const DB_PORT = String(process.env.DB_PORT);
+
+// const pool = new Pool({
+//   user: DB_USER,
+//   password: DB_PASSWORD,
+//   host: DB_HOST,
+//   database: DB_DATABASE,
+//   port: DB_PORT,
+// });
+
+import pool from './config.js';
 
 async function query() {
   const client = await pool.connect();

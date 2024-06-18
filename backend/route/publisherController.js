@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { get_Publishers, get_Publisher } from '../../db/database.js';
+import { get_Publishers, get_Publisher } from '../../db/database/database.js';
 
 router.get('/:publisherId?', async (req, res) => {
   const publisherId = req.params.publisherId;

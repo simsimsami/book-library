@@ -6,7 +6,7 @@ import {
   get_Authors,
   get_AuthorBooks,
   post_Author,
-} from '../../db/database.js';
+} from '../../db/database/database.js';
 
 router.get('/:authorId?', async (req, res) => {
   const authorId = req.params.authorId;
